@@ -9,15 +9,26 @@ You can use the `string_splitter_with_any_delimiters` function to split a string
 ### Example
 
 ```python
+
 import re
 
-def string_splitter_with_any_delimiters(delimiters, input_string):
+##Method-1 (Single Delimiter)
+
+def string_splitter_with_any_Delimiter(delimiter,input):
+    fields = re.split(f'[{delimiter}\\s]+', input)
+    non_empty_field = [field for field in fields if field]
+    print(non_empty_field)
+string_splitter_with_any_Delimiter('sdf','sdfkdjsadfsd diweiw;1231:foo')
+
+
+##Method-2 (Multiple Delimiter)
+
+def split_string_with_multiple_delimiters(delimiters, input_string):
     fields = re.split('[' + re.escape(''.join(delimiters)) + '\\s]+', input_string)
     non_empty_fields = [field for field in fields if field]
-    return non_empty_fields
+    print(non_empty_fields)
 
-# Usage example
-delimiters = ['sdf', ' ', ';', ':']
-input_string = 'sdfkdjsadfsd diweiw;1231:foo'
-result = string_splitter_with_any_delimiters(delimiters, input_string)
-print(result)
+
+split_string_with_multiple_delimiters(['sdf', ' ', ';', ':'], 'sdfkdjsadfsd diweiw;1231:foo')
+
+
